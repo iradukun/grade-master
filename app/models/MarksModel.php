@@ -1,6 +1,6 @@
 <?php
 // GradeMaster/app/models/MarksModel.php
-
+require_once APPROOT . '/core/Database.php';
 class MarksModel {
     private $db;
 
@@ -10,7 +10,7 @@ class MarksModel {
 
     public function getStudentsForTeacher($teacherId) {
         $karine_conn = $this->db->connect();
-        $stmt = $karine_conn->prepare("SELECT s.id, s.name, s.student_id FROM yourname_tblstudents s JOIN yourname_tblteachers t ON s.class = t.class WHERE t.id = :teacher_id");
+        $stmt = $karine_conn->prepare("SELECT s.id, s.name, s.student_id FROM students s JOIN teachers t ON s.class = t.class WHERE t.id = :teacher_id");
         $stmt->bindParam(':teacher_id', $teacherId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ class MarksModel {
 
     public function enterMarks($studentId, $subject, $marks, $teacherId) {
         $karine_conn = $this->db->connect();
-        $stmt = $karine_conn->prepare("INSERT INTO yourname_tblmarks (student_id, subject, marks, teacher_id) VALUES (:student_id, :subject, :marks, :teacher_id)");
+        $stmt = $karine_conn->prepare("INSERT INTO marks (student_id, subject, marks, teacher_id) VALUES (:student_id, :subject, :marks, :teacher_id)");
         $stmt->bindParam(':student_id', $studentId);
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':marks', $marks);

@@ -8,20 +8,26 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="<?php echo URLROOT; ?>">Home</a></li>
-                <li><a href="<?php echo URLROOT; ?>/login">Login</a></li>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>GradeMaster</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="<?php echo URLROOT; ?>" class="active">Home</a></li>
+                <li><a href="<?php echo URLROOT; ?>/login" class="login-btn">Login</a></li>
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="login-container">
         <h1>Login to <?php echo SITENAME; ?></h1>
         <?php if (isset($data['error'])) : ?>
             <p class="error"><?php echo $data['error']; ?></p>
         <?php endif; ?>
-        <form action="<?php echo URLROOT; ?>/login" method="post">
+        <form action="<?php echo URLROOT; ?>/login" method="post" class="login-form">
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -42,7 +48,7 @@
         </form>
     </main>
     <footer>
-        <p>&copy; 2023 <?php echo SITENAME; ?>. All rights reserved.</p>
+        <p>&copy; 2025 <?php echo SITENAME; ?>. All rights reserved.</p>
     </footer>
 </body>
 </html>

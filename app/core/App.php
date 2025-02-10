@@ -1,7 +1,8 @@
 <?php
 // GradeMaster/app/core/App.php
 
-require_once APPROOT . '/controllers/Controller.php';  // Update this line
+require_once APPROOT . '/controllers/Controller.php'; 
+require_once 'Database.php'; // Update this line
 
 class App {
     protected $controller = 'HomeController';
