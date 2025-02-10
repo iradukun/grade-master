@@ -1,5 +1,5 @@
 <?php
-// GradeMaster/app/core/Controller.php
+// GradeMaster/app/controllers/Controller.php
 
 class Controller {
     public function model($model) {
@@ -15,4 +15,3 @@ class Controller {
         }
     }
 }
-?>

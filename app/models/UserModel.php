@@ -24,4 +24,12 @@ class UserModel {
             return false;
         }
     }
+    public function getUserModules($userId, $userType) {
+        $karine_conn = $this->db->connect();
+        $stmt = $karine_conn->prepare("SELECT m.* FROM yourname_tblmodules m JOIN yourname_tbluser_modules um ON m.id = um.module_id WHERE um.user_id = :user_id AND um.user_type = :user_type");
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->bindParam(':user_type', $userType);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

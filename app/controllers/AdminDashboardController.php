@@ -24,21 +24,21 @@ class AdminDashboardController extends Controller {
         $this->view('admin/dashboard', $data);
     }
 
-    public function addModule() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $moduleName = $_POST['module_name'];
-            $description = $_POST['description'];
+    // public function addModule() {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $moduleName = $_POST['module_name'];
+    //         $description = $_POST['description'];
 
-            if ($this->moduleModel->addModule($moduleName, $description)) {
-                header('Location: ' . URLROOT . '/adminDashboard');
-            } else {
-                $data['error'] = 'Failed to add module';
-                $this->view('admin/addModule', $data);
-            }
-        } else {
-            $this->view('admin/addModule');
-        }
-    }
+    //         if ($this->moduleModel->addModule($moduleName, $description)) {
+    //             header('Location: ' . URLROOT . '/adminDashboard');
+    //         } else {
+    //             $data['error'] = 'Failed to add module';
+    //             $this->view('admin/addModule', $data);
+    //         }
+    //     } else {
+    //         $this->view('admin/addModule');
+    //     }
+    // }
 
     public function registerUser() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -56,6 +56,55 @@ class AdminDashboardController extends Controller {
             }
         } else {
             $this->view('admin/registerUser');
+        }
+    }
+
+    public function modules() {
+        $modules = $this->moduleModel->getAllModules();
+        $data = ['modules' => $modules];
+        $this->view('admin/modules', $data);
+    }
+
+    public function addModule() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $moduleName = $_POST['module_name'];
+            $description = $_POST['description'];
+
+            if ($this->moduleModel->addModule($moduleName, $description)) {
+                header('Location: ' . URLROOT . '/adminDashboard/modules');
+            } else {
+                $data['error'] = 'Failed to add module';
+                $this->view('admin/addModule', $data);
+            }
+        } else {
+            $this->view('admin/addModule');
+        }
+    }
+
+    public function editModule($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $moduleName = $_POST['module_name'];
+            $description = $_POST['description'];
+
+            if ($this->moduleModel->updateModule($id, $moduleName, $description)) {
+                header('Location: ' . URLROOT . '/adminDashboard/modules');
+            } else {
+                $data['error'] = 'Failed to update module';
+                $this->view('admin/editModule', $data);
+            }
+        } else {
+            $module = $this->moduleModel->getModuleById($id);
+            $data = ['module' => $module];
+            $this->view('admin/editModule', $data);
+        }
+    }
+
+    public function deleteModule($id) {
+        if ($this->moduleModel->deleteModule($id)) {
+            header('Location: ' . URLROOT . '/adminDashboard/modules');
+        } else {
+            $data['error'] = 'Failed to delete module';
+            $this->view('admin/modules', $data);
         }
     }
 }

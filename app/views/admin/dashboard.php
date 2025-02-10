@@ -10,6 +10,10 @@
 </head>
 <body>
     <header>
+        <?php
+    require_once APPROOT . '/helpers/navigation_helper.php';
+    echo generateNavigation($_SESSION['user_type'], $_SESSION['user_modules']);
+    ?>
         <nav>
             <ul>
                 <li><a href="<?php echo URLROOT; ?>/adminDashboard">Dashboard</a></li>

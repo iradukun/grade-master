@@ -3,9 +3,9 @@
 
 class Database {
     private $host = 'localhost';
-    private $db_name = 'your_full_name';
-    private $username = 'your_username';
-    private $password = 'your_password';
+    private $db_name = 'grademaster';
+    private $username = 'root';
+    private $password = '';
     private $conn;
 
     public function connect() {
